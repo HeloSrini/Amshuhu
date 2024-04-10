@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ANGULAR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="app.component.css">
+</head>
+<body>
+
+<div class="search-container">
+  <div class="search-wrapper">
+    <div class="image-container">
+      <img src="/angular/mconnect.png" alt="M-Connect" style="width: 150px">
+    </div>
+    <div class="button-group">
+      <button (click)="toggleForm()">Add</button>
+    </div>
+  </div>
+</div>
+
+<h1 style="text-align: center;">isteer-Mconnect</h1>
+
+<table class="data-table">
+  <thead >
+    <tr>
+      <th>cmpid</th>
+      <th>cmpname</th>
+      <th>cmploc</th>
+      <th>status</th>
+      <th>Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td>{{ item.cmpid }}</td>
+      <td>{{ item.cmpname }}</td>
+      <td>{{ item.cmploc }}</td>
+      <td>
+        <label class="switch">
+          <input type="checkbox" [checked]="item.status === 'Y'" (change)="toggleStatus($event,item.cmpid)">
+          <span class="slider round"></span>
+        </label>
+      </td>
+      <td>
+        <ng-container *ngIf="item.status=== 'Y'">
+          <button (click)="editdata(item)">Edit</button>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="add-form" *ngIf="showForm">
+  <h1>Add a New Data</h1>
+  <form [formGroup]="form">
+    <!-- <label for="cmpid">cmpid:</label>
+    <input type="text" id="cmpid" name="cmpid" formControlName="cmpid" required> -->
+    <label for="cmpname">cmpname:</label>
+    <input type="text" id="cmpname" name="cmpname" formControlName="cmpname" required>
+    <label for="cmploc">cmploc:</label>
+    <input type="text" id="cmploc" name="cmploc" formControlName="cmploc" required>
+    <button (click)="submitform()">Submit</button>
+  </form>
+  <button (click)="toggleForm()">Cancel</button> 
+</div>
+
+<div *ngIf="showEdit">
+  <h1>Update</h1>
+  <form [formGroup]="active">
+    <label for="cmpname">cmpname:</label>
+    <input type="text" id="cmpname" name="cmpname" formControlName="cmpname" required>
+    <label for="cmploc"> cmploc:</label>
+    <input type="text" id="cmploc" name="cmploc" formControlName="cmploc" required>
+    <button (click)="Clickchange()">Submit</button>
+  </form>
+</div>
+
+</body>
+</html>
