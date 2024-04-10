@@ -62,7 +62,7 @@ function handlePost(req, res,next) {
 // Function to handle PUT requests 
 function handleEditData(req, res,next) {
   const newDataPut = req.body;
-  const sql = 'UPDATE company SET ?WHERE cmpid = ?';
+  const sql = 'UPDATE company SET ? WHERE cmpid = ?';
   pool.query(sql, [newDataPut, req.params.id], (error, result) => {
     if (error) {
       console.error('MySQL Error:', error);
